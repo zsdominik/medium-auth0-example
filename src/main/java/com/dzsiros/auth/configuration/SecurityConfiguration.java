@@ -51,14 +51,12 @@ public class SecurityConfiguration {
 
         OAuth2TokenValidator<Jwt> issuerValidator = JwtValidators.createDefaultWithIssuer(issuer);
         OAuth2TokenValidator<Jwt> audienceValidator = new AudienceValidator(audience);
-        OAuth2TokenValidator<Jwt> timestampValidator = new JwtTimestampValidator();
         OAuth2TokenValidator<Jwt> signatureValidator = new SignatureValidator(issuer);
 
         OAuth2TokenValidator<Jwt> delegate =
                 new DelegatingOAuth2TokenValidator<>(
                         issuerValidator,
                         audienceValidator,
-                        timestampValidator,
                         signatureValidator
                 );
 
